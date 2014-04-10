@@ -27,6 +27,15 @@ group :production do
   gem 'warden-github'
 end
 
+group :development, :test do
+  gem 'rspec-rails', github: 'rspec/rspec-rails' # Use head for rails 4.1 support
+  gem 'factory_girl_rails'
+end
+
+group :test do
+  gem 'mocha'
+end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
