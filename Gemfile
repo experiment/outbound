@@ -20,6 +20,8 @@ gem 'spring',        group: :development
 gem 'pry-rails'
 
 group :production do
+  gem 'rails_12factor'
+
   # Use warden for github auth
   gem 'warden'
   gem 'warden-github'
