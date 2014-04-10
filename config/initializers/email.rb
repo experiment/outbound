@@ -10,3 +10,5 @@ ActionMailer::Base.add_delivery_method :mandrill,
 if Rails.env.production?
   ActionMailer::Base.delivery_method = :mandrill
 end
+
+ActionMailer::Base.register_interceptor TagEmailInterceptor
