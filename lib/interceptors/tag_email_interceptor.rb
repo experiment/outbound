@@ -2,6 +2,10 @@
 
 class TagEmailInterceptor
 
+  def self.previewing_email(mail)
+    add_outbound_tag mail
+  end
+
   def self.delivering_email(mail)
     add_outbound_tag mail
   end

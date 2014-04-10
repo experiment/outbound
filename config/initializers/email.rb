@@ -11,4 +11,8 @@ if Rails.env.production?
   ActionMailer::Base.delivery_method = :mandrill
 end
 
-ActionMailer::Base.register_interceptor TagEmailInterceptor
+%i(tag_email_interceptor).each do |interceptor|
+  # Register both previewing and delivering
+  ActionMailer::Base.register_preview_interceptor interceptor
+  ActionMailer::Base.register_interceptor interceptor
+end
