@@ -19,6 +19,12 @@ gem 'spring',        group: :development
 
 gem 'pry-rails'
 
+group :production do
+  # Use warden for github auth
+  gem 'warden'
+  gem 'warden-github'
+end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -30,4 +36,3 @@ gem 'pry-rails'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-
