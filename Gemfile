@@ -19,6 +19,10 @@ gem 'spring',        group: :development
 
 gem 'pry-rails'
 
+group :production do
+  gem 'rails_12factor'
+end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -30,4 +34,3 @@ gem 'pry-rails'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-
