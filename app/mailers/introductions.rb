@@ -1,8 +1,10 @@
 class Introductions < ActionMailer::Base
   default from: 'oscarj@experiment.com'
 
-  def first_contact
+  def first_contact(contact_id)
+    @contact = Contact.find contact_id
+
     mail to: 'rpjlower@gmail.com',
-         subject: 'WELCOME'
+         subject: "I saw your story in #{@contact.source}"
   end
 end
