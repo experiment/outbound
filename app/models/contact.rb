@@ -18,4 +18,7 @@ class Contact < ActiveRecord::Base
     end
   end
 
+  def info
+    HashWithIndifferentAccess.new read_attribute(:info)
+  end
 end

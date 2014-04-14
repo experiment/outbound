@@ -1,6 +1,6 @@
 Hi <%= @contact.first_name %>,
 
-I saw the recent article about your work in <%= @contact.source %> (!!URL!!).
+I saw the recent article about your work in <%= @contact.info[:source] %> (<%= @contact.info[:url] %>).
 
 I'm with experiment.com - we're a crowd-funding platform for scientific research (think Kickstarter for science). We've gotten a lot of feedback that we "need more neuroscience projects!" so we'll be launching a Neuroscience category in May.
 
