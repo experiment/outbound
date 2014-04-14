@@ -15,6 +15,7 @@ gem 'coffee-rails', '~> 4.0.0'
 # gem 'therubyracer',  platforms: :ruby
 
 gem 'sidekiq', '< 3' # Bugsnag isn't sidekiq 3 compatible yet
+gem 'sinatra'
 
 gem 'pry-rails'
 
