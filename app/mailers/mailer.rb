@@ -1,5 +1,5 @@
 class Mailer < ActionMailer::Base
-  default to: Proc.new { to }
+  default to: Proc.new { to.email }
 
   protected
 
@@ -8,6 +8,9 @@ class Mailer < ActionMailer::Base
 
       # Record the email method in _mailer_method
       @_message._mailer_method = method_name
+
+      # Record the recipient contact id
+      @_message._recipient_contact_id = @contact.id
     end
 
     def mail(headers = {}, &block)
@@ -23,7 +26,7 @@ class Mailer < ActionMailer::Base
 
     def to
       if @contact
-        @contact.email
+        @contact
       else
         raise 'Must specifiy @contact!'
       end
