@@ -1,5 +1,6 @@
 class Mailer < ActionMailer::Base
-  default to: Proc.new { to.email }
+  default to: Proc.new { to.email },
+          from: 'oscarj@experiment.com'
 
   protected
 

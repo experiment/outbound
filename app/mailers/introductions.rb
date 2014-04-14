@@ -1,5 +1,4 @@
 class Introductions < Mailer
-  default from: 'oscarj@experiment.com'
 
   def first_contact(contact_id)
     @contact = Contact.find contact_id
