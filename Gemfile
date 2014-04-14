@@ -14,6 +14,8 @@ gem 'coffee-rails', '~> 4.0.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
 
+gem 'sidekiq', '< 3' # Bugsnag isn't sidekiq 3 compatible yet
+
 gem 'pry-rails'
 
 # For importing contacts from google docs
