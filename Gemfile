@@ -25,6 +25,10 @@ group :production do
   # Use warden for github auth
   gem 'warden'
   gem 'warden-github'
+
+  # Bugsnag for error tracking
+  # https://bugsnag.com/experiment/outbound-dot-experiment-dot-com/errors
+  gem 'bugsnag'
 end
 
 group :development, :test do
