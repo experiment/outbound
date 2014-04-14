@@ -25,15 +25,17 @@ namespace :import do
       Rails.logger.info "Importing #{email}..."
 
       # Create Contact
-      Contact.create!(source: 'manual') do |contact|
+      contact = Contact.new(source: 'manual') do |contact|
         contact.name = "#{first_name} #{last_name}"
         contact.email = email
         contact.info = { type: 'neuroscience', source: source, url: url }
       end
 
-      # Mark as imported
-      sheet[i+1, 10] = 'Y'
-      sheet.save
+      if contact.save
+        # Mark as imported
+        sheet[i+1, 10] = 'Y'
+        sheet.save
+      end
     end
   end
 end
