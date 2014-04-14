@@ -29,6 +29,7 @@ module Outbound
 
     config.autoload_paths += %W(
       #{config.root}/lib/interceptors
+      #{config.root}/lib/observers
     )
   end
 end
