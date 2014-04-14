@@ -6,6 +6,8 @@ class Contact < ActiveRecord::Base
 
   has_many :emails
 
+  scope :emailed, -> { joins(:emails).uniq }
+
   # Best guess of a contacts first name
   def first_name
     case name.split.size

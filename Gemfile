@@ -19,6 +19,8 @@ gem 'pry-rails'
 # For importing contacts from google docs
 gem 'google_drive', require: false
 
+gem 'slim'
+
 group :production do
   gem 'rails_12factor'
 
