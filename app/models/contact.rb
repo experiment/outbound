@@ -3,4 +3,6 @@ class Contact < ActiveRecord::Base
 
   validates :source, presence: true
   validates :email, presence: true, uniqueness: true
+
+  has_many :emails
 end
