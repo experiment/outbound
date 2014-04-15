@@ -23,4 +23,8 @@ class Contact < ActiveRecord::Base
   def info
     HashWithIndifferentAccess.new read_attribute(:info)
   end
+
+  def emailed?
+    emails.any?
+  end
 end

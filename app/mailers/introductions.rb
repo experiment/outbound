@@ -3,6 +3,8 @@ class Introductions < Mailer
   def neuroscience(contact_id)
     @contact = Contact.find contact_id
 
+    return false if @contact.emailed?
+
     ensure_contact_has_info :source, :url
 
     mail subject: "I saw your story in #{@contact.info[:source]}"
