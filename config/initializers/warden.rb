@@ -5,4 +5,6 @@ if Rails.env.production?
     config.scope_defaults :default, config: { scope: 'read:org' }
   end
 
+  Rails.application.config.middleware.insert_after Warden::Manager, GithubAuth
+
 end

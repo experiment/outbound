@@ -28,6 +28,7 @@ module Outbound
     # config.i18n.default_locale = :de
 
     config.autoload_paths += %W(
+      #{config.root}/lib/middleware
       #{config.root}/lib/interceptors
       #{config.root}/lib/observers
     )
