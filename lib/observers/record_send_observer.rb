@@ -13,6 +13,9 @@ class RecordSendObserver
 
       contact.emails.create do |email|
         email.method = message._mailer_method
+        if message._version
+          email.version = message._version
+        end
       end
     end
 end

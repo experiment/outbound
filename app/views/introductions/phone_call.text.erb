@@ -2,7 +2,7 @@ Hi <%= @contact.first_name %>,
 
 I saw the recent article about your work in <%= @contact.info[:source] %> (<%= @contact.info[:url] %>).
 
-I'm with experiment.com - we're a crowd-funding platform for scientific research (think Kickstarter for science). We've gotten a lot of feedback that we "need more neuroscience projects!" so we'll be launching a Neuroscience category in May.
+I'm with experiment.com - we're a crowd-funding platform for scientific research (think Kickstarter for science). We've gotten a lot of feedback that we "need more <%= @contact.info[:type] %> projects!" so we'll be launching a <%= @contact.info[:type].capitalize %> category in May.
 
 I was wondering if you have a side-project you'd consider crowd-funding. I'd be happy to talk more about what the process entails. Feel free to give me a call anytime at 206-512-5031.
 

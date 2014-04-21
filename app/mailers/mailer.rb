@@ -20,6 +20,11 @@ class Mailer < ActionMailer::Base
         raise 'Not allowed to explicitly set to. Set @contact instead'
       end
 
+      # If template is specified, record as version
+      if headers.has_key? :template_name
+        @_message._version = headers[:template_name]
+      end
+
       super
     end
 
