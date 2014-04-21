@@ -1,4 +1,4 @@
-class GithubAuth
+class Authentication::Github
   def initialize(app)
     @app = app
   end
