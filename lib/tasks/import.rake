@@ -38,4 +38,44 @@ namespace :import do
       end
     end
   end
+
+  desc 'Import ocean contacts'
+  task ocean: :environment do
+    require 'google_drive'
+
+    session = GoogleDrive.login ENV['GOOGLE_DRIVE_EMAIL'],
+      ENV['GOOGLE_DRIVE_PASSWORD']
+
+    doc = session.spreadsheet_by_key('1hdb4iHnY81Br5wgF-Z1NASfZEfd-rwkD37-QgAJoPx4')
+    sheet = doc.worksheets.first
+
+    sheet.rows.each_with_index do |row, i|
+      # Skip header row
+      next if i < 1
+
+      term, full_name, first_name, location, in_us, topic, email, url,
+        source, imported = *row
+
+      # Skip unless in US
+      next unless in_us =~ /^y/i
+
+      # Skip unless has source and url
+      next unless source.present? && url.present?
+
+      Rails.logger.info "Importing #{email}..."
+
+      # Create Contact
+      contact = Contact.new(source: 'manual') do |contact|
+        contact.name = full_name
+        contact.email = email
+        contact.info = { type: 'ocean research', source: source, url: url }
+      end
+
+      if contact.save
+        # Mark as imported
+        sheet[i+1, 10] = 'Y'
+        sheet.save
+      end
+    end
+  end
 end
