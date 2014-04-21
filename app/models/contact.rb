@@ -1,4 +1,6 @@
 class Contact < ActiveRecord::Base
+  include Token
+
   enum source: %w(manual)
 
   validates :source, presence: true
