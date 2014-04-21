@@ -2,8 +2,9 @@ class Introductions < Mailer
 
   def first_contact(contact_id, template = nil)
     @contact = Contact.find contact_id
-    # Choose version unless specified in args
-    template ||= %w(phone_call start_page).sample
+    # # Choose version unless specified in args
+    # template ||= %w(phone_call start_page).sample
+    template = 'phone_call'
 
     return false if @contact.emailed?
 
