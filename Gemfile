@@ -24,12 +24,12 @@ gem 'google_drive', require: false
 
 gem 'slim'
 
+# Use warden for github auth
+gem 'warden'
+gem 'warden-github'
+
 group :production do
   gem 'rails_12factor'
-
-  # Use warden for github auth
-  gem 'warden'
-  gem 'warden-github'
 
   # Bugsnag for error tracking
   # https://bugsnag.com/experiment/outbound-dot-experiment-dot-com/errors

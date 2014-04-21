@@ -1,4 +1,4 @@
-if Rails.env.production?
+if Rails.env.production? || ENV['GITHUB_CLIENT_ID']
 
   Rails.application.config.middleware.use Warden::Manager do |config|
     config.default_strategies :github
