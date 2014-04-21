@@ -36,6 +36,10 @@ group :production do
   gem 'bugsnag'
 end
 
+group :development do
+  gem 'dotenv-rails'
+end
+
 group :development, :test do
   gem 'rspec-rails', github: 'rspec/rspec-rails' # Use head for rails 4.1 support
   gem 'factory_girl_rails'
