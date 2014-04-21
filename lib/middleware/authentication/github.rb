@@ -1,26 +1,9 @@
-class Authentication::Github
-  def initialize(app)
-    @app = app
-  end
-
-  def call(env)
-    @env = env
-
-    if authenticated_with_github?
-      @app.call env
-    else
-      forbidden!
-    end
-  end
+class Authentication::Github < Authentication::Base
 
   private
 
-    def authenticated_with_github?
+    def authenticated?
       warden.authenticate! && user && user_in_organization?
-    end
-
-    def forbidden!
-      [403, {}, []]
     end
 
     def warden
