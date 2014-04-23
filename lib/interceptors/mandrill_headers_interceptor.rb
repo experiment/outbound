@@ -15,5 +15,8 @@ class MandrillHeadersInterceptor
     def self.add_mandrill_headers(mail)
       # Create HTML versions of plain text emails
       mail.header['X-MC-AutoHtml'] = true
+
+      # Add open tracking pixel
+      mail.header['X-MC-Track'] = 'opens'
     end
 end
