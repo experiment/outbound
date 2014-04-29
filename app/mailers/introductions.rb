@@ -13,9 +13,14 @@ class Introductions < Mailer
     @published_at = @contact.info[:paper][:published_at].to_date
 
     @keyword = case @contact.info[:journal]
-      when false
-        # TODO, add keywords for each journal
-        # ["BMC Cancer", "BMC Evolutionary Biology", "BMC Neuroscience", "BMC Pediatrics", "BMC Plant Biology", "BMC Psychology", "Behavioral and Brain Functions", "PLOS Biology", "PLOS Computational Biology"]
+      when 'BMC Neuroscience', 'BMC Psychology', 'Behavioral and Brain Functions'
+        'neuroscience & psychology'
+      when 'BMC Cancer'
+        'cancer'
+      when 'BMC Evolutionary Biology', 'BMC Plant Biology', 'PLOS Biology', 'PLOS Computational Biology'
+        'biology'
+      when 'BMC Pediatrics'
+        'pediatric'
       else
         raise "No keyword for this journal (#{@contact.info[:journal]})"
     end
