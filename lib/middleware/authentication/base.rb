@@ -1,6 +1,11 @@
 module Authentication
   class Base
 
+    # Base authentication middleware
+    # Once a middlewares #authenticated? returns true
+    # the request is considered authenticated and futher
+    # #authenticated?s won't be called
+
     def initialize(app)
       @app = app
     end
@@ -8,21 +13,26 @@ module Authentication
     def call(env)
       @env = env
 
-      if authenticated?
-        @app.call env
-      else
-        forbidden!
-      end
+      authenticate!
+
+      @app.call env
     end
 
     private
 
-      def authenticated?
-        false
-      end
-
-      def forbidden!
-        [403, {}, []]
+      def authenticate!
+        if @env['authenticated']
+          # Previously authenticated, carry on
+          true
+        elsif authenticated?
+          # This middleware has authenticated,
+          # mark request as authenticated
+          @env['authenticated'] = true
+          # And carry on
+          true
+        else
+          false
+        end
       end
   end
 end

@@ -1,10 +1,10 @@
 class Authentication::Github < Authentication::Base
 
-  private
+  def authenticated?
+    warden.authenticate! && user && user_in_organization?
+  end
 
-    def authenticated?
-      warden.authenticate! && user && user_in_organization?
-    end
+  private
 
     def warden
       @env['warden']
