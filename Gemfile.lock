@@ -1,18 +1,3 @@
-GIT
-  remote: git://github.com/rspec/rspec-rails.git
-  revision: 3d63b16bc6d8f8cf6d605e1d62e940f8441d0cd7
-  specs:
-    rspec-rails (3.0.0.beta2)
-      actionpack (>= 3.0)
-      activemodel (>= 3.0)
-      activesupport (>= 3.0)
-      railties (>= 3.0)
-      rspec-collection_matchers
-      rspec-core (= 3.0.0.beta2)
-      rspec-expectations (= 3.0.0.beta2)
-      rspec-mocks (= 3.0.0.beta2)
-      rspec-support (= 3.0.0.beta2)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -145,7 +130,7 @@ GEM
     redis (3.0.7)
     redis-namespace (1.4.1)
       redis (~> 3.0.4)
-    rspec-collection_matchers (0.0.3)
+    rspec-collection_matchers (0.0.4)
       rspec-expectations (>= 2.99.0.beta1)
     rspec-core (3.0.0.beta2)
       rspec-support (= 3.0.0.beta2)
@@ -153,6 +138,16 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (= 3.0.0.beta2)
     rspec-mocks (3.0.0.beta2)
+      rspec-support (= 3.0.0.beta2)
+    rspec-rails (3.0.0.beta2)
+      actionpack (>= 3.0)
+      activemodel (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-collection_matchers
+      rspec-core (= 3.0.0.beta2)
+      rspec-expectations (= 3.0.0.beta2)
+      rspec-mocks (= 3.0.0.beta2)
       rspec-support (= 3.0.0.beta2)
     rspec-support (3.0.0.beta2)
     sass (3.2.19)
@@ -220,7 +215,7 @@ DEPENDENCIES
   pry-rails
   rails (= 4.1.0)
   rails_12factor
-  rspec-rails!
+  rspec-rails (~> 3.0.0.beta2)
   sass-rails (~> 4.0.3)
   sidekiq (< 3)
   sinatra

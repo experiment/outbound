@@ -41,7 +41,8 @@ group :development do
 end
 
 group :development, :test do
-  gem 'rspec-rails', github: 'rspec/rspec-rails' # Use head for rails 4.1 support
+  gem 'rspec-rails', '~> 3.0.0.beta2' # Use 3.0.0.beta2 for rails 4.1 support
+
   gem 'factory_girl_rails'
 end
 
