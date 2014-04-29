@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     resource :contacts, only: :create
   end
 
+  resource :mandrill_hooks, only: %i(show create)
+
   root 'application#home'
 
 end
