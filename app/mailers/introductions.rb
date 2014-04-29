@@ -20,7 +20,7 @@ class Introductions < Mailer
         raise "No keyword for this journal (#{@contact.info[:journal]})"
     end
 
-    mail subject: "I saw your story in #{@contact.info[:journal]}",
+    mail subject: "I saw your paper in #{@contact.info[:journal]}",
          template_name: template
   end
 
