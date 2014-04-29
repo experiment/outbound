@@ -1,3 +1,25 @@
 Hi <%= @contact.first_name %>,
 
-https://experiment.com/start/<%= @contact.token %>
+I saw the recent article about your work in <%= @contact.info[:source] %> (<%= @contact.info[:url] %>).
+
+I'm with experiment.com - we're a crowd-funding platform for scientific research (think Kickstarter for science). We’ve funded 125 projects, totaling just over $700k, but they’ve been limited to only a few fields. We’d love to explore topics in physiology, like nutrition, exercise, and sleep. In scanning through the news I came across your article, and I thought I'd reach out.
+
+I realize I’m introducing a pretty new funding model. Here’s how it works:
+
+- Researcher posts a cool project (usually < $10k - think seed stage ideas that don’t have early data)
+- Backers browse the project and chip in if they find it compelling
+- If the project’s funding goal is met/exceeded, researcher receives funding, keeps backers updated on progress
+
+This is a bit oversimplified, but that’s the general idea. Some common logistical questions:
+
+- We send all funds to Universities as restricted gifts (no reporting contracts, no IDCs)
+- Who funds projects (backers)? People who the research impacts. They may have supported experiment projects before, but often they haven’t. We work together to figure out who these people are and where they get their information. 
+- Tangible rewards (like you see with kickstarter) don’t make sense for basic research. Instead, we ask you share trials, tribulations, and progress with your backers. This is more meaningful anyway.
+
+To start a project or to see what it entails, visit https://experiment.com/start/<%= @contact.token %> 
+
+I know I rambled, thanks for staying with me. Let me know if you have more questions!
+
+
+cheers,
+Oscar
