@@ -17,7 +17,7 @@ class Introductions < Mailer
         # TODO, add keywords for each journal
         # ["BMC Cancer", "BMC Evolutionary Biology", "BMC Neuroscience", "BMC Pediatrics", "BMC Plant Biology", "BMC Psychology", "Behavioral and Brain Functions", "PLOS Biology", "PLOS Computational Biology"]
       else
-        # raise "No keyword for this journal (#{@contact.info[:journal]})"
+        raise "No keyword for this journal (#{@contact.info[:journal]})"
     end
 
     mail subject: "I saw your story in #{@contact.info[:journal]}",
