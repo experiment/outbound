@@ -28,6 +28,8 @@ gem 'slim'
 gem 'warden'
 gem 'warden-github'
 
+gem 'mandrill-rails'
+
 group :production do
   gem 'rails_12factor'
 
@@ -41,8 +43,14 @@ group :development do
 end
 
 group :development, :test do
-  gem 'rspec-rails', github: 'rspec/rspec-rails' # Use head for rails 4.1 support
+  # Use 3.0.0.beta2 for rails 4.1 support
+  gem 'rspec', '~> 3.0.0.beta2'
+  gem 'rspec-rails', '~> 3.0.0.beta2'
+
   gem 'factory_girl_rails'
+
+  gem 'guard'
+  gem 'guard-rspec'
 end
 
 group :test do
