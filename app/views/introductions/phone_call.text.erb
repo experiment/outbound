@@ -1,8 +1,8 @@
 Hi <%= @contact.first_name %>,
 
-I noticed your <%= @contact.info[:month] %> <%= @contact.info[:year] %> publication with <%= @contact.info[:second_author] %> in <%= @contact.info[:journal] %>.
+I noticed your <%= @published_at.strftime('%B') %> <%= @published_at.year %> publication in <%= @contact.info[:journal] %>.
 
-I'm with experiment.com - we're a crowd-funding platform for scientific research (think Kickstarter for research). We've gotten a lot of feedback that we need more <%= @contact.info[:keyword] %> projects, so I thought I’d reach out to you.
+I'm with experiment.com - we're a crowd-funding platform for scientific research (think Kickstarter for research). We've gotten a lot of feedback that we need more <%= @keyword %> projects, so I thought I’d reach out to you.
 
 I was wondering if you have a side-project you'd consider crowd-funding (usually $5-10k to collect some preliminary data). I can tell you more about what the process entails and answer any questions you have.
 

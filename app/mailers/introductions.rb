@@ -7,9 +7,19 @@ class Introductions < Mailer
 
     return false if @contact.emailed?
 
-    ensure_contact_has_info :source, :url
+    ensure_contact_has_info :journal, :paper
 
-    mail subject: "I saw your story in #{@contact.info[:source]}",
+    @published_at = @contact.info[:paper][:published_at].to_date
+
+    @keyword = case @contact.info[:journal]
+      when false
+        # TODO, add keywords for each journal
+        # ["BMC Cancer", "BMC Evolutionary Biology", "BMC Neuroscience", "BMC Pediatrics", "BMC Plant Biology", "BMC Psychology", "Behavioral and Brain Functions", "PLOS Biology", "PLOS Computational Biology"]
+      else
+        # raise "No keyword for this journal (#{@contact.info[:journal]})"
+    end
+
+    mail subject: "I saw your story in #{@contact.info[:journal]}",
          template_name: template
   end
 
