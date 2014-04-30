@@ -10,7 +10,14 @@ h2
 
 ul
   - @dates.each do |date|
+    - @emails = Email.on_date(date)
     li
       .date = date.strftime('%F')
-      .count #{Email.on_date(date).count} sent
-      .count #{Email.on_date(date).opened.count} opened
+      .count #{@emails.count} sent
+      .count #{@emails.opened.count} opened
+      .count
+        = @emails.select {|email| email.contact.start_page_viewed_at }.count
+        |  viewed start page
+      .count
+        = @emails.select {|email| email.contact.project_created_at }.count
+        |  created a project

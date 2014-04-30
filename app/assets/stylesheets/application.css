@@ -13,3 +13,10 @@
  *= require_tree .
  *= require_self
  */
+
+ul li {
+  padding-top: 10px;
+}
+ul li .date {
+  font-size: 1.2em;
+}
