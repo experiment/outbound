@@ -10,6 +10,8 @@ class Contact < ActiveRecord::Base
 
   scope :emailed, -> { joins(:emails).uniq }
 
+  scope :by_email, lambda { |email| where('LOWER(email) = ?', email.downcase) }
+
   # Best guess of a contacts first name
   def first_name
     case name.split.size
