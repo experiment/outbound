@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     resource :contacts, only: :create
+    resource :events, only: :create
   end
 
   resource :mandrill_hooks, only: %i(show create)
