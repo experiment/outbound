@@ -24,6 +24,9 @@ describe Api::EventsController do
           post :create, type: 'project_created', email: 'bob@experiment.com',
             timestamp: timestamp
 
+          contact.reload
+          expect(contact.project_created_at).to be_nil
+
           assert_response 404
         end
       end
