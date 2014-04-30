@@ -35,4 +35,8 @@ class Contact < ActiveRecord::Base
   def project_created!(at)
     update_attributes! project_created_at: at
   end
+
+  def start_page_viewed!(at)
+    update_attributes! start_page_viewed_at: at
+  end
 end

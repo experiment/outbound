@@ -11,6 +11,10 @@ module Api
         else
           head :not_found
         end
+      when 'start_page_viewed'
+        contact = Contact.find_by_token(start_page_viewed_data[:token])
+        contact.start_page_viewed! start_page_viewed_data[:timestamp]
+        head :ok
       else
         raise "Unknown event type: #{type}"
       end
@@ -25,6 +29,13 @@ module Api
       def project_created_data
         {
           email: params.require(:email),
+          timestamp: Time.parse(params.require(:timestamp))
+        }
+      end
+
+      def start_page_viewed_data
+        {
+          token: params.require(:token),
           timestamp: Time.parse(params.require(:timestamp))
         }
       end
