@@ -7,3 +7,10 @@ h2
 h2
   = Contact.emailed.count
   |  contacts emailed
+
+ul
+  - @dates.each do |date|
+    li
+      .date = date.strftime('%F')
+      .count #{Email.on_date(date).count} sent
+      .count #{Email.on_date(date).where('opened IS NOT NULL').count} opened
