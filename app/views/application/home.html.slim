@@ -13,4 +13,4 @@ ul
     li
       .date = date.strftime('%F')
       .count #{Email.on_date(date).count} sent
-      .count #{Email.on_date(date).where('opened IS NOT NULL').count} opened
+      .count #{Email.on_date(date).opened.count} opened
