@@ -4,15 +4,16 @@ describe Api::EventsController do
 
   describe 'POST create' do
     let!(:contact) { Contact.create! source: 'manual', email: 'ryan@experiment.com' }
+    let(:timestamp) { Time.now }
 
     context 'project_created event' do
       context 'when email matches a contact' do
         it 'works' do
           post :create, type: 'project_created', email: 'ryan@experiment.com',
-            timestamp: Time.now
+            timestamp: timestamp
 
           contact.reload
-          # TODO, check contact has been marked as having created a project
+          expect(contact.project_created_at.to_i).to eq timestamp.to_i
 
           assert_response 200
         end
@@ -21,9 +22,7 @@ describe Api::EventsController do
       context 'when no contact matches' do
         it 'works' do
           post :create, type: 'project_created', email: 'bob@experiment.com',
-            timestamp: Time.now
-
-          contact.reload
+            timestamp: timestamp
 
           assert_response 404
         end

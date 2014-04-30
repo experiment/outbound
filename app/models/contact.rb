@@ -31,4 +31,8 @@ class Contact < ActiveRecord::Base
   def emailed?
     emails.any?
   end
+
+  def project_created!(at)
+    update_attributes! project_created_at: at
+  end
 end

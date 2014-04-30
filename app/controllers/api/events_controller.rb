@@ -5,7 +5,8 @@ module Api
       case type
       when 'project_created'
         if (contact = Contact.by_email(project_created_data[:email]).take)
-          # TODO, mark contact as having created a project
+          # Mark contact as having created a project
+          contact.project_created! project_created_data[:timestamp]
           head :ok
         else
           head :not_found
