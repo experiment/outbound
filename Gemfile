@@ -26,6 +26,8 @@ gem 'google_drive', require: false
 
 gem 'slim'
 
+gem 'active_model_serializers'
+
 # Use warden for github auth
 gem 'warden'
 gem 'warden-github'
