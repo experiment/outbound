@@ -29,4 +29,8 @@ describe MandrillHooksController do
       expect(email.opened.to_i).to eq timestamp.to_i
     end
   end
+
+  describe 'handle_inbound' do
+    pending 'add specs'
+  end
 end

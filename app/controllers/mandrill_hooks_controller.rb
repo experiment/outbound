@@ -11,6 +11,10 @@ class MandrillHooksController < ApplicationController
     end
   end
 
+  def handle_inbound(payload)
+    Rails.logger.info payload
+  end
+
   private
 
     def record_open!(email, timestamp)
