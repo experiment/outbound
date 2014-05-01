@@ -12,7 +12,7 @@ class MandrillHooksController < ApplicationController
   end
 
   def handle_inbound(payload)
-    Rails.logger.info payload
+    Rails.logger.info payload['msg']
   end
 
   private
