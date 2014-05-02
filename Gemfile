@@ -34,6 +34,10 @@ gem 'warden-github'
 
 gem 'mandrill-rails'
 
+# For reading oscarj emails to backfill replies (see one_time:backfill_replies)
+gem 'gmail', require: false
+gem 'mime', '0.3.0', require: false
+
 group :production do
   gem 'rails_12factor'
 
