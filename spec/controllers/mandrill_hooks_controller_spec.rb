@@ -2,25 +2,24 @@ require 'spec_helper'
 
 describe MandrillHooksController do
 
-    let(:timestamp) { Time.now }
-    let(:payload) do
-      {
-        event: 'open',
-        msg: {
-          ts: 1.day.ago.to_i,
-          subject: 'Open webhook',
-          sender: 'oscarj@experiment.com',
-          tags: [ 'outbound' ]
-        },
-        ts: timestamp.to_i
-      }
-    end
+  let(:contact) { Contact.create! source: 'manual', email: 'ryan@experiment.com'}
+  let(:timestamp) { Time.now }
+  let(:payload) { { msg: {}, ts: timestamp.to_i} }
 
   describe 'handle_open' do
-    let(:contact) { Contact.create! source: 'manual', email: 'ryan@experiment.com'}
+
+    before do
+      payload[:event] = 'open'
+      payload[:msg].merge!({
+        email: contact.email,
+        subject: 'Open webhook',
+        sender: 'oscarj@experiment.com',
+        tags: [ 'outbound' ],
+        ts: 1.day.ago.to_i
+      })
+    end
 
     it 'marks email as opened' do
-      payload[:msg][:email] = contact.email
       email = contact.emails.create! method: 'first_contact'
 
       post :create, mandrill_events: [ payload ].to_json
@@ -31,6 +30,13 @@ describe MandrillHooksController do
   end
 
   describe 'handle_inbound' do
-    pending 'add specs'
+
+    before do
+      payload[:event] = 'inbound'
+    end
+
+    xit 'figure out inbound payload format' do
+      post :create, mandrill_events: [ payload ].to_json
+    end
   end
 end

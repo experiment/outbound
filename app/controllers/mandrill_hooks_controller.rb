@@ -12,7 +12,9 @@ class MandrillHooksController < ApplicationController
   end
 
   def handle_inbound(payload)
-    Rails.logger.info payload['msg']
+    Rails.logger.info payload
+
+    record_reply! payload['msg'], Time.at(payload['ts'])
   end
 
   private
@@ -24,5 +26,9 @@ class MandrillHooksController < ApplicationController
         email = contact.emails.where(method: 'first_contact').take
         email.opened! timestamp
       end
+    end
+
+    def record_reply!(msg, timestamp)
+      Rails.logger.info "record_reply! [#{timestamp}] #{msg['from_email']}"
     end
 end
