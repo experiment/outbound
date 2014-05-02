@@ -15,6 +15,7 @@ ul
       .date = date.strftime('%F')
       .count #{@emails.count} sent
       .count #{@emails.opened.count} opened
+      .count #{@emails.replied.count} replied (currently wrong)
       .count
         = @emails.select {|email| email.contact.start_page_viewed_at }.count
         |  viewed start page

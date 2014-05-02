@@ -5,6 +5,7 @@ class Email < ActiveRecord::Base
   scope :on_date, lambda { |date| where("DATE_TRUNC('day', created_at) = ?", date) }
 
   scope :opened, -> { where('opened IS NOT NULL') }
+  scope :replied, -> { where('replied_at IS NOT NULL') }
 
   def opened!(at)
     return if opened?
