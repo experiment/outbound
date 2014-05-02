@@ -9,4 +9,10 @@ class Email < ActiveRecord::Base
   def opened!(at)
     update_attributes! opened: at
   end
+
+  def replied!(at)
+    return if replied_at?
+
+    update_attributes! replied_at: at
+  end
 end
