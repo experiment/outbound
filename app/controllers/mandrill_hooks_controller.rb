@@ -21,7 +21,7 @@ class MandrillHooksController < ApplicationController
 
     def record_open!(email, timestamp)
       puts "record_open! #{email} at #{timestamp}"
-      if (contact = Contact.find_by(email: email))
+      if (contact = Contact.by_email(email))
         # TODO, presumes email opened was first_contact
         email = contact.emails.where(method: 'first_contact').take
         email.opened! timestamp
