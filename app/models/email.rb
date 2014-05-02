@@ -7,6 +7,8 @@ class Email < ActiveRecord::Base
   scope :opened, -> { where('opened IS NOT NULL') }
 
   def opened!(at)
+    return if opened?
+
     update_attributes! opened: at
   end
 
