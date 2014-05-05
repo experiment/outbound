@@ -29,6 +29,9 @@ class Contact < ActiveRecord::Base
   end
 
   def emailed?
+    # If old outbound contact, was emailed from old system
+    return true if old_outbound?
+
     emails.any?
   end
 
