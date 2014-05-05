@@ -34,7 +34,7 @@ namespace :one_time do
     SQL
 
     ActiveRecord::Base.connection.execute(query).each do |row|
-      puts "[#{row['contacted_at']}]\t#{row['name']}, #{row['email']}"
+      Rails.logger.info "[#{row['contacted_at']}]\t#{row['name']}, #{row['email']}"
       info = {
         journal: row['journal_name']
       }
