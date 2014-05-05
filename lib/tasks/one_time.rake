@@ -36,7 +36,8 @@ namespace :one_time do
     ActiveRecord::Base.connection.execute(query).each do |row|
       Rails.logger.info "[#{row['contacted_at']}]\t#{row['name']}, #{row['email']}"
       info = {
-        journal: row['journal_name']
+        journal: row['journal_name'],
+        contacted_at: row['journal_name']
       }
       Contact.create(source: 'old_outbound',
         name: row['name'], email: row['email'], info: info)
