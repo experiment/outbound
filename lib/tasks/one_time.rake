@@ -29,14 +29,17 @@ namespace :one_time do
 
     # Query to get contacted journal_contacts from app db
     query = <<-SQL
-      SELECT * FROM dblink('app', 'SELECT name, email, contacted_at FROM journal_contacts WHERE contacted')
-        AS t1(name text, email text, contacted_at timestamp);
+      SELECT * FROM dblink('app', 'SELECT name, email, contacted_at, journal_name FROM journal_contacts WHERE contacted')
+        AS t1(name text, email text, contacted_at timestamp, journal_name text);
     SQL
 
     ActiveRecord::Base.connection.execute(query).each do |row|
       puts "[#{row['contacted_at']}]\t#{row['name']}, #{row['email']}"
+      info = {
+        journal: row['journal_name']
+      }
       Contact.create(source: 'old_outbound',
-        name: row['name'], email: row['email'])
+        name: row['name'], email: row['email'], info: info)
     end
   end
 end
