@@ -22,7 +22,12 @@ namespace :one_time do
 
   desc 'backfill contacts emailed from app'
   task backfill_contacts: :environment do
-    # Get contacted journal_contacts from app db
+    # Connect to app db
+    ActiveRecord::Base.connection.execute <<-SQL
+      SELECT dblink_connect('app', '#{ENV['APP_DATABASE_URL']}')
+    SQL
+
+    # Query to get contacted journal_contacts from app db
     query = <<-SQL
       SELECT * FROM dblink('app', 'SELECT name, email, contacted_at FROM journal_contacts WHERE contacted')
         AS t1(name text, email text, contacted_at timestamp);
