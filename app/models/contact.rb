@@ -1,7 +1,7 @@
 class Contact < ActiveRecord::Base
   include Token
 
-  enum source: %w(manual filofax)
+  enum source: %w(manual filofax old_outbound)
 
   validates :source, presence: true
   validates :email, presence: true, uniqueness: { case_sensitive: false }
@@ -29,6 +29,9 @@ class Contact < ActiveRecord::Base
   end
 
   def emailed?
+    # If old outbound contact, was emailed from old system
+    return true if old_outbound?
+
     emails.any?
   end
 
