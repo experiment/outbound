@@ -7,7 +7,7 @@ describe Api::ContactsController do
 
     context 'when contact exists' do
       it 'returns the contact as JSON' do
-        get :show, id: 'bob@test.com'
+        get :show, email: 'bob@test.com'
 
         expect(response.content_type).to eq 'application/json'
 
@@ -18,7 +18,7 @@ describe Api::ContactsController do
     context "when contact doesn't exist" do
       it 'raises ActiveRecord::RecordNotFound' do
         expect {
-          get :show, id: 'joe@test.com'
+          get :show, email: 'joe@test.com'
         }.to raise_error
       end
     end

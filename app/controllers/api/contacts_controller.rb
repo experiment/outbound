@@ -2,7 +2,7 @@ module Api
   class ContactsController < ApplicationController
 
     def show
-      contact = Contact.by_email(params[:id]).take!
+      contact = Contact.by_email(params[:email]).take!
       render json: contact
     end
 
