@@ -3,6 +3,7 @@ if Rails.env.production? || ENV['GITHUB_CLIENT_ID']
   authentication_middleware = [
     Authentication::Mandrill, # Allow any mandrill requests through
     Authentication::Header, # Allow requests with valid Authentication-Header
+    Authentication::Param, # Allow requests with valid authority param
     Authentication::Github
   ]
 
