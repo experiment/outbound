@@ -1,6 +1,11 @@
 module Api
   class ContactsController < ApplicationController
 
+    def show
+      contact = Contact.by_email(params[:id]).take!
+      render json: contact
+    end
+
     def create
       Contact.create! contact_params do |contact|
         contact.source = source_params

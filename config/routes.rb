@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
 
   namespace :api do
-    resource :contacts, only: :create
+    resources :contacts, only: %i(show create)
     resource :events, only: :create
   end
 

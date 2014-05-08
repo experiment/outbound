@@ -2,6 +2,28 @@ require 'spec_helper'
 
 describe Api::ContactsController do
 
+  describe 'GET show' do
+    before { Contact.create! source: 'manual', email: 'bob@test.com' }
+
+    context 'when contact exists' do
+      it 'returns the contact as JSON' do
+        get :show, id: 'bob@test.com'
+
+        expect(response.content_type).to eq 'application/json'
+
+        assert_response 200
+      end
+    end
+
+    context "when contact doesn't exist" do
+      it 'raises ActiveRecord::RecordNotFound' do
+        expect {
+          get :show, id: 'joe@test.com'
+        }.to raise_error
+      end
+    end
+  end
+
   describe 'POST create' do
     let(:contact_params) do
       { email: 'bob@test.com', name: 'Bob Smith', info: { journal: 'Title' } }
