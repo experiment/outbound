@@ -3,7 +3,7 @@ module Api
 
     def show
       contact = Contact.by_email(params[:email]).take!
-      render json: contact, callback: params[:callback]
+      render json: contact.slice(:id), callback: params[:callback]
     end
 
     def create
