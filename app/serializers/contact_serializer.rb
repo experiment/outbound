@@ -1,7 +1,7 @@
 class ContactSerializer < ActiveModel::Serializer
   self.root = false
 
-  attributes :id, :email
+  attributes :id, :email, :start_page_viewed_at, :project_created_at
   attributes :contacted_at, :opened_at, :replied_at
 
   def contacted_at
