@@ -14,9 +14,10 @@
  *= require_self
  */
 
-ul li {
-  padding-top: 10px;
+table {
+  text-align: center;
 }
-ul li .date {
-  font-size: 1.2em;
+
+table td {
+  width: 75px;
 }

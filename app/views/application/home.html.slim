@@ -8,17 +8,21 @@ h2
   = Contact.emailed.count
   |  contacts emailed
 
-ul
+table
+  tr
+    th date
+    th sent
+    th opened
+    th replied
+    th viewed start page
+    th created a project
+
   - @dates.each do |date|
     - @emails = Email.on_date(date)
-    li
-      .date = date.strftime('%F')
-      .count #{@emails.count} sent
-      .count #{@emails.opened.count} opened
-      .count #{@emails.replied.count} replied
-      .count
-        = @emails.select {|email| email.contact.start_page_viewed_at }.count
-        |  viewed start page
-      .count
-        = @emails.select {|email| email.contact.project_created_at }.count
-        |  created a project
+    tr
+      td = date.strftime('%F')
+      td = @emails.count
+      td = @emails.opened.count
+      td = @emails.replied.count
+      td = @emails.select {|email| email.contact.start_page_viewed_at }.count
+      td = @emails.select {|email| email.contact.project_created_at }.count
