@@ -18,7 +18,7 @@ table
     th created a project
 
   - @dates.each do |date|
-    - @emails = Email.on_date(date)
+    - @emails = Email.on_date(date).includes(:contact)
     - sent = @emails.count
     tr
       td = date.strftime('%F')
