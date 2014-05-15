@@ -19,10 +19,18 @@ table
 
   - @dates.each do |date|
     - @emails = Email.on_date(date)
+    - sent = @emails.count
     tr
       td = date.strftime('%F')
-      td = @emails.count
-      td = @emails.opened.count
-      td = @emails.replied.count
-      td = @emails.select {|email| email.contact.start_page_viewed_at }.count
-      td = @emails.select {|email| email.contact.project_created_at }.count
+      td = sent
+      - [ \
+        @emails.opened.count, \
+        @emails.replied.count, \
+        @emails.select {|email| email.contact.start_page_viewed_at }.count, \
+        @emails.select {|email| email.contact.project_created_at }.count \
+        ].each do |stat|
+        td
+          .percent
+            = (100 * stat / sent.to_f).round(1)
+            | %
+          .count = stat
