@@ -11,8 +11,10 @@ class OutboundProcess < ActiveRecord::Base
     end
     state :contacted do
       event :unsubscribe, transitions_to: :unsubscribed
+      event :stop, transitions_to: :dead
     end
 
+    state :dead # they have said no
     state :unsubscribed # requested unsubscription, never contact again
   end
 end
