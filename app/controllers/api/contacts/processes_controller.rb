@@ -5,6 +5,9 @@ module Api
 
       def event
         case event_params
+          when 'interest'
+            @process.interest!
+
           when 'stop'
             @process.stop!
           when 'unsubscribe'

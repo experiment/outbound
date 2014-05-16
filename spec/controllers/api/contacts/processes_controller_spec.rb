@@ -18,6 +18,15 @@ describe Api::Contacts::ProcessesController do
         assert_response 200
       end
 
+      it 'interested on interest' do
+        post :event, contact_id: @contact.id, event: 'interest'
+
+        process = @contact.reload.outbound_process
+        expect(process).to be_interested
+
+        assert_response 200
+      end
+
       it 'unsubscribes on unsubscribe' do
         post :event, contact_id: @contact.id, event: 'unsubscribe'
 
