@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140505180026) do
+ActiveRecord::Schema.define(version: 20140516210519) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "hstore"
   enable_extension "dblink"
+  enable_extension "hstore"
 
   create_table "contacts", force: true do |t|
     t.string   "email"
@@ -40,5 +40,14 @@ ActiveRecord::Schema.define(version: 20140505180026) do
   end
 
   add_index "emails", ["contact_id"], name: "index_emails_on_contact_id", using: :btree
+
+  create_table "outbound_processes", force: true do |t|
+    t.integer  "contact_id"
+    t.string   "workflow_state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "outbound_processes", ["contact_id"], name: "index_outbound_processes_on_contact_id", using: :btree
 
 end
