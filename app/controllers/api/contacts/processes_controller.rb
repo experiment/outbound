@@ -4,6 +4,13 @@ module Api
       before_filter :get_contact, :get_process
 
       def event
+        case event_params
+          when 'stop'
+            @process.stop!
+          when 'unsubscribe'
+            @process.unsubscribe!
+        end
+
         head :ok
       end
 
@@ -20,6 +27,10 @@ module Api
 
         def contact_params
           params.require(:contact_id)
+        end
+
+        def event_params
+          params.require(:event)
         end
     end
   end
