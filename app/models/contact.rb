@@ -7,6 +7,7 @@ class Contact < ActiveRecord::Base
   validates :email, presence: true, uniqueness: { case_sensitive: false }
 
   has_many :emails
+  has_one :outbound_process
 
   scope :emailed, -> { joins(:emails).uniq }
 

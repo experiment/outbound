@@ -38,6 +38,8 @@ gem 'mandrill-rails'
 gem 'gmail', require: false
 gem 'mime', '0.3.0', require: false
 
+gem 'workflow'
+
 group :production do
   gem 'rails_12factor'
 
