@@ -10,7 +10,7 @@ describe Api::Contacts::ProcessesController do
 
     context 'a contacted contact' do
       it 'stops on stop' do
-        post :event, contact_id: @contact.id, event: 'stop'
+        get :event, contact_id: @contact.id, event: 'stop'
 
         process = @contact.reload.outbound_process
         expect(process).to be_dead
@@ -19,7 +19,7 @@ describe Api::Contacts::ProcessesController do
       end
 
       it 'interested on interest' do
-        post :event, contact_id: @contact.id, event: 'interest'
+        get :event, contact_id: @contact.id, event: 'interest'
 
         process = @contact.reload.outbound_process
         expect(process).to be_interested
@@ -28,7 +28,7 @@ describe Api::Contacts::ProcessesController do
       end
 
       it 'unsubscribes on unsubscribe' do
-        post :event, contact_id: @contact.id, event: 'unsubscribe'
+        get :event, contact_id: @contact.id, event: 'unsubscribe'
 
         process = @contact.reload.outbound_process
         expect(process).to be_unsubscribed

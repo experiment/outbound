@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   namespace :api do
     resources :contacts, only: :create do
       get :show, on: :collection, constraints: { email: /.+/ }
-      post 'process/event', to: 'contacts/processes#event'
+      # GET so we can use JSONP
+      get 'process/event', to: 'contacts/processes#event'
     end
     resource :events, only: :create
   end
