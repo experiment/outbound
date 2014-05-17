@@ -6,6 +6,8 @@ class Contact < ActiveRecord::Base
   validates :source, presence: true
   validates :email, presence: true, uniqueness: { case_sensitive: false }
 
+  after_create :create_outbound_process
+
   has_many :emails
   has_one :outbound_process
 

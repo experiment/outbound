@@ -5,7 +5,7 @@ describe Api::Contacts::ProcessesController do
   describe 'POST event' do
     before do
       @contact = Contact.create! source: 'filofax', email: 'bob@test.com'
-      @contact.create_outbound_process! workflow_state: 'contacted'
+      @contact.outbound_process.update_attributes! workflow_state: 'contacted'
     end
 
     context 'a contacted contact' do
