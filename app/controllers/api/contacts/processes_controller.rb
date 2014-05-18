@@ -14,7 +14,9 @@ module Api
             @process.unsubscribe!
         end
 
-        head :ok
+        render json: @contact,
+          serializer: ContactSerializer,
+          callback: params[:callback]
       end
 
       private
