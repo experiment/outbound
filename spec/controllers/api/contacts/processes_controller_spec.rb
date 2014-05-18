@@ -15,6 +15,7 @@ describe Api::Contacts::ProcessesController do
         process = @contact.reload.outbound_process
         expect(process).to be_dead
 
+        expect(response.content_type).to eq 'application/json'
         assert_response 200
       end
 
@@ -24,6 +25,7 @@ describe Api::Contacts::ProcessesController do
         process = @contact.reload.outbound_process
         expect(process).to be_interested
 
+        expect(response.content_type).to eq 'application/json'
         assert_response 200
       end
 
@@ -33,6 +35,7 @@ describe Api::Contacts::ProcessesController do
         process = @contact.reload.outbound_process
         expect(process).to be_unsubscribed
 
+        expect(response.content_type).to eq 'application/json'
         assert_response 200
       end
     end
