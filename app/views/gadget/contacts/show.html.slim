@@ -6,7 +6,36 @@
   .batch
    = @contact.contacted_at
 
-.status
-  button.event{data-event='interest'} Interested (auto)
-  button.event{data-event='stop'} Stop
-  button.event{data-event='unsubscribe'} Unsubscribe
+- if @contact.outbound_process.dead?
+  h2 DEAD
+
+- elsif @contact.outbound_process.unsubscribed?
+  h2 UNSUBSCRIBED
+
+- else
+  .status
+    button.event{data-event='interest'} Interested (auto)
+    button.event{data-event='stop'} Stop
+    button.event{data-event='unsubscribe'} Unsubscribe
+
+javascript:
+  window.contact = { id: #{@contact.id} }
+  window.authority = #{ENV['AUTHENTICATION_HEADER']}
+
+
+coffee:
+  triggerEvent = (event) ->
+    xhr = $.ajax
+      url: '/api/contacts/' + contact.id + '/process/event',
+      data: {
+        event: event
+        authority: authority
+      },
+      dataType: 'jsonp'
+
+    xhr.done -> window.location.reload()
+    xhr.fail -> console.log('Something went wrong! :-(')
+
+  $ ->
+    $('button.event').on 'click', (e) ->
+      triggerEvent $(e.target).data('event')
