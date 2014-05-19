@@ -1,0 +1,12 @@
+.info
+  = @contact.email
+  | [
+  = link_to @contact.id, contact_url(@contact)
+  | ]
+  .batch
+   = @contact.contacted_at
+
+.status
+  button.event{data-event='interest'} Interested (auto)
+  button.event{data-event='stop'} Stop
+  button.event{data-event='unsubscribe'} Unsubscribe

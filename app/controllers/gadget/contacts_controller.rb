@@ -4,7 +4,6 @@ module Gadget
     after_filter :allow_in_iframes
 
     def show
-      render text: @contact.name
     end
 
     private
