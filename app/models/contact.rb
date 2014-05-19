@@ -38,6 +38,12 @@ class Contact < ActiveRecord::Base
     emails.any?
   end
 
+  def contacted_at
+    return nil unless emails.any?
+
+    emails.first.created_at
+  end
+
   def project_created!(at)
     update_attributes! project_created_at: at
   end

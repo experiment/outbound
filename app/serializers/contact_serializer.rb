@@ -1,16 +1,12 @@
 class ContactSerializer < ActiveModel::Serializer
   self.root = false
 
+  # attributes
   attributes :id, :email, :start_page_viewed_at, :project_created_at
+  # model methods
   attributes :contacted_at
-
+  # serializer methods
   attributes :dead, :unsubscribed
-
-  def contacted_at
-    return nil unless object.emails.any?
-
-    object.emails.first.created_at
-  end
 
   def dead
     object.outbound_process.dead?

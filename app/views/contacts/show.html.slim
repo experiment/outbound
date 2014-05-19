@@ -1,0 +1,15 @@
+h1 Outbound
+
+h2 #{@contact.name} - #{@contact.email}
+
+h3
+  ' emailed at
+  = @contact.contacted_at
+
+- if @process.dead?
+  h1 DEAD
+- if @process.unsubscribed?
+  h1 UNSUBSCRIBED
+
+= @contact.to_json
+= @process.to_json

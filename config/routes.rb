@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     resource :events, only: :create
   end
 
+  resources :contacts, only: :show
+
   resource :mandrill_hooks, only: %i(show create)
 
   root 'application#home'
