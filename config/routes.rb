@@ -12,6 +12,10 @@ Rails.application.routes.draw do
     resource :events, only: :create
   end
 
+  namespace :gadget do
+    get 'contacts', constraints: { email: /.+/ }, to: 'contacts#show'
+  end
+
   resources :contacts, only: :show
 
   resource :mandrill_hooks, only: %i(show create)
