@@ -6,7 +6,11 @@ class ContactSerializer < ActiveModel::Serializer
   # model methods
   attributes :contacted_at
   # serializer methods
-  attributes :dead, :unsubscribed
+  attributes :url, :dead, :unsubscribed
+
+  def url
+    contact_url object
+  end
 
   def dead
     object.outbound_process.dead?
