@@ -22,5 +22,13 @@ class OutboundProcess < ActiveRecord::Base
 
     state :dead # they have said no
     state :unsubscribed # requested unsubscription, never contact again
+
+    # Store timestamps of state entries
+    after_transition do |from, to, name, *args|
+      self.workflow_state_timestamps = workflow_state_timestamps.merge({
+        "#{to}_at" => Time.now
+      })
+      self.save!
+    end
   end
 end
