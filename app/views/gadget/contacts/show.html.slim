@@ -6,6 +6,8 @@
   .batch
    = @contact.contacted_at
 
+= @contact.outbound_process.current_state
+
 - if @contact.outbound_process.dead?
   h2 DEAD
 
