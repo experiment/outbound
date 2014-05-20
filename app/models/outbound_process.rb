@@ -11,11 +11,16 @@ class OutboundProcess < ActiveRecord::Base
     end
     state :contacted do
       event :interest, transitions_to: :interested
+      event :interest_manual, transitions_to: :interested_manual
 
       event :unsubscribe, transitions_to: :unsubscribed
       event :stop, transitions_to: :dead
     end
     state :interested do # interested & follow up
+      event :unsubscribe, transitions_to: :unsubscribed
+      event :stop, transitions_to: :dead
+    end
+    state :interested_manual do # interested & no follow up
       event :unsubscribe, transitions_to: :unsubscribed
       event :stop, transitions_to: :dead
     end

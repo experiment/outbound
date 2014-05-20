@@ -5,8 +5,10 @@ module Api
 
       def event
         case event_params
-          when 'interest'
+          when 'interest', 'interest_auto'
             @process.interest!
+          when 'interest_manual'
+            @process.interest_manual!
 
           when 'stop'
             @process.stop!
