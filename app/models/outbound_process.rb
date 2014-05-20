@@ -31,4 +31,8 @@ class OutboundProcess < ActiveRecord::Base
       self.save!
     end
   end
+
+  def active?
+    !dead? && !unsubscribed?
+  end
 end

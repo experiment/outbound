@@ -9,13 +9,7 @@
 .state
   = @contact.outbound_process.current_state
 
-- if @contact.outbound_process.dead?
-  h2 DEAD
-
-- elsif @contact.outbound_process.unsubscribed?
-  h2 UNSUBSCRIBED
-
-- else
+- if @contact.outbound_process.active?
   .status
     button.event{data-event='interest'} Interested (auto)
     button.event{data-event='stop'} Stop
