@@ -21,17 +21,20 @@
     button.event{data-event='unsubscribe'} Unsubscribe
 
 javascript:
-  window.contact = { id: #{@contact.id} }
-  window.authority = #{ENV['AUTHENTICATION_HEADER']}
+  Gadget = {};
+  Gadget.contact = { id: #{@contact.id} };
+  Gadget.authority = #{ENV['AUTHENTICATION_HEADER']};
+
+  console.log(Gadget);
 
 
 coffee:
   triggerEvent = (event) ->
     xhr = $.ajax
-      url: '/api/contacts/' + contact.id + '/process/event',
+      url: '/api/contacts/' + Gadget.contact.id + '/process/event',
       data: {
         event: event
-        authority: authority
+        authority: Gadget.authority
       },
       dataType: 'jsonp'
 
