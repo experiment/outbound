@@ -23,7 +23,7 @@
 javascript:
   Gadget = {};
   Gadget.contact = { id: #{@contact.id} };
-  Gadget.authority = #{ENV['AUTHENTICATION_HEADER']};
+  Gadget.authority = '#{ENV['AUTHENTICATION_HEADER']}';
 
   console.log(Gadget);
 
