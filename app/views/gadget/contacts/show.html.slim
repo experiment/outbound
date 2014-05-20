@@ -1,0 +1,41 @@
+.info
+  = @contact.email
+  | [
+  = link_to @contact.id, contact_url(@contact)
+  | ]
+  .batch
+   = @contact.contacted_at.strftime('%F')
+
+.state
+  = @contact.outbound_process.current_state
+
+- if @contact.outbound_process.active?
+  .status
+    button.event{data-event='interest'} Interested (auto)
+    button.event{data-event='stop'} Stop
+    button.event{data-event='unsubscribe'} Unsubscribe
+
+javascript:
+  Gadget = {};
+  Gadget.contact = { id: #{@contact.id} };
+  Gadget.authority = '#{ENV['AUTHENTICATION_HEADER']}';
+
+  console.log(Gadget);
+
+
+coffee:
+  triggerEvent = (event) ->
+    xhr = $.ajax
+      url: '/api/contacts/' + Gadget.contact.id + '/process/event',
+      data: {
+        event: event
+        authority: Gadget.authority
+      },
+      dataType: 'jsonp'
+
+    xhr.done -> window.location.reload()
+    xhr.fail -> console.log('Something went wrong! :-(')
+
+  $ ->
+    $('button.event').on 'click', (e) ->
+      triggerEvent $(e.target).data('event')
