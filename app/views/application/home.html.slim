@@ -14,11 +14,12 @@ table
     th sent
     th opened
     th replied
+    th are interested
     th viewed start page
     th created a project
 
   - @dates.each do |date|
-    - @emails = Email.where(method: 'first_contact').on_date(date).includes(:contact)
+    - @emails = Email.where(method: 'first_contact').on_date(date).includes(contact: :outbound_process)
     - sent = @emails.count
     tr
       td = link_to date.strftime('%F'), batch_url(date.strftime('%F'))
@@ -26,6 +27,7 @@ table
       - [ \
         @emails.opened.count, \
         @emails.replied.count, \
+        @emails.select {|email| email.contact.outbound_process.interested? }.count, \
         @emails.select {|email| email.contact.start_page_viewed_at }.count, \
         @emails.select {|email| email.contact.project_created_at }.count \
         ].each do |stat|
