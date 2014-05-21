@@ -37,6 +37,15 @@ class OutboundProcess < ActiveRecord::Base
     end
   end
 
+  ## Transition methods, called as a result of a state change
+  concerning :Transitions do
+
+    def on_interested_entry(new_state, event, *args)
+      FollowUps.interested_first_follow_up(contact.id).deliver
+    end
+
+  end
+
   def active?
     !dead? && !unsubscribed?
   end
