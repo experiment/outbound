@@ -6,15 +6,16 @@
   .batch
    = @contact.contacted_at.strftime('%F')
 
-.state
-  = @contact.outbound_process.current_state
+- if @process
+  .state
+    = @process.current_state
 
-- if @contact.outbound_process.active?
-  .status
-    button.event{data-event='interest_auto'} Interested (auto)
-    button.event{data-event='interest_manual'} Interested (manual)
-    button.event{data-event='stop'} Stop
-    button.event{data-event='unsubscribe'} Unsubscribe
+  - if @process.active?
+    .status
+      button.event{data-event='interest_auto'} Interested (auto)
+      button.event{data-event='interest_manual'} Interested (manual)
+      button.event{data-event='stop'} Stop
+      button.event{data-event='unsubscribe'} Unsubscribe
 
 javascript:
   Gadget = {};
