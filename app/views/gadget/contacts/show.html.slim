@@ -12,6 +12,8 @@
 
   - if @process.active?
     .status
+      - if @process.can_called?
+        button.event{data-event='called'} Called
       button.event{data-event='interest_auto'} Interested (auto)
       button.event{data-event='interest_manual'} Interested (manual)
       button.event{data-event='stop'} Stop

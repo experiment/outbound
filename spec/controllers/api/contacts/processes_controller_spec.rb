@@ -9,6 +9,16 @@ describe Api::Contacts::ProcessesController do
     end
 
     context 'a contacted contact' do
+      it 'been_called on called' do
+        get :event, contact_id: @contact.id, event: 'called'
+
+        process = @contact.reload.outbound_process
+        expect(process).to be_been_called
+
+        expect(response.content_type).to eq 'application/json'
+        assert_response 200
+      end
+
       it 'interested on interest' do
         get :event, contact_id: @contact.id, event: 'interest_auto'
 

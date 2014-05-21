@@ -10,6 +10,14 @@ class OutboundProcess < ActiveRecord::Base
       event :contact, transitions_to: :contacted
     end
     state :contacted do
+      event :called, transitions_to: :been_called
+      event :interest, transitions_to: :interested
+      event :interest_manual, transitions_to: :interested_manual
+
+      event :unsubscribe, transitions_to: :unsubscribed
+      event :stop, transitions_to: :dead
+    end
+    state :been_called do
       event :interest, transitions_to: :interested
       event :interest_manual, transitions_to: :interested_manual
 

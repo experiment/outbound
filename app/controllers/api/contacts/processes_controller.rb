@@ -5,6 +5,8 @@ module Api
 
       def event
         case event_params
+          when 'called'
+            @process.called!
           when 'interest_auto'
             @process.interest!
           when 'interest_manual'
