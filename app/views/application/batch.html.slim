@@ -5,3 +5,7 @@ h3
 h3
   = @emails.select {|email| email.contact.project_created_at }.count
   |  projects created
+
+ul
+  - @emails.select {|email| email.contact.project_created_at }.each do |email|
+    li #{email.contact.name} (#{email.contact.email})
