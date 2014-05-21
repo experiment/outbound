@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   resource :mandrill_hooks, only: %i(show create)
 
+  get ':date' => 'application#batch', as: :batch
   root 'application#home'
 
 end

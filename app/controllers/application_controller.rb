@@ -5,4 +5,9 @@ class ApplicationController < ActionController::Base
       .map(&:created_at).sort
     # render layout: nil
   end
+
+  def batch
+    @date = Date.parse(params[:date])
+    @emails = Email.on_date(@date).includes(:contact)
+  end
 end

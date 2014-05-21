@@ -1,0 +1,7 @@
+h2 = @date
+h3
+  = @emails.count
+  |  sent
+h3
+  = @emails.select {|email| email.contact.project_created_at }.count
+  |  projects created

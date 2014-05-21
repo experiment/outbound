@@ -21,7 +21,7 @@ table
     - @emails = Email.on_date(date).includes(:contact)
     - sent = @emails.count
     tr
-      td = date.strftime('%F')
+      td = link_to date.strftime('%F'), batch_url(date.strftime('%F'))
       td = sent
       - [ \
         @emails.opened.count, \
