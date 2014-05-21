@@ -24,7 +24,9 @@ class MandrillHooksController < ApplicationController
       if (contact = Contact.by_email(email).take)
         # TODO, presumes email opened was first_contact
         email = contact.emails.where(method: 'first_contact').take
-        email.opened! timestamp
+        if email
+          email.opened! timestamp
+        end
       end
     end
 
@@ -36,7 +38,9 @@ class MandrillHooksController < ApplicationController
       if (contact = Contact.by_email(email).take)
         # TODO, presumes email opened was first_contact
         email = contact.emails.where(method: 'first_contact').take
-        email.replied! timestamp
+        if email
+          email.replied! timestamp
+        end
       end
     end
 end
