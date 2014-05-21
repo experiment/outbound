@@ -14,6 +14,7 @@ table
     th sent
     th opened
     th replied
+    th called
     th are interested
     th viewed start page
     th created a project
@@ -27,6 +28,7 @@ table
       - [ \
         @emails.opened.count, \
         @emails.replied.count, \
+        @emails.select {|email| email.contact.outbound_process.been_called? }.count, \
         @emails.select {|email| email.contact.outbound_process.interested? }.count, \
         @emails.select {|email| email.contact.start_page_viewed_at }.count, \
         @emails.select {|email| email.contact.project_created_at }.count \
