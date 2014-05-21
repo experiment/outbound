@@ -4,6 +4,7 @@ module Gadget
     after_filter :allow_in_iframes
 
     def show
+      @process = @contact.outbound_process
     end
 
     private
