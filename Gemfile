@@ -46,6 +46,8 @@ group :production do
   # Bugsnag for error tracking
   # https://bugsnag.com/experiment/outbound-dot-experiment-dot-com/errors
   gem 'bugsnag'
+
+  gem 'newrelic_rpm'
 end
 
 group :development do
