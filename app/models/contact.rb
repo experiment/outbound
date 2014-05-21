@@ -8,8 +8,9 @@ class Contact < ActiveRecord::Base
 
   after_create :create_outbound_process
 
-  has_many :emails
+  belongs_to :batch
   has_one :outbound_process
+  has_many :emails
 
   scope :emailed, -> { joins(:emails).uniq }
 
