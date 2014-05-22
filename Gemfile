@@ -16,7 +16,7 @@ gem 'coffee-rails', '~> 4.0.0'
 
 gem 'puma'
 
-gem 'sidekiq', '< 3' # Bugsnag isn't sidekiq 3 compatible yet
+gem 'sidekiq'
 gem 'sinatra'
 
 gem 'pry-rails'
