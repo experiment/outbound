@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   end
 
   namespace :gadget do
+    resources :contacts, only: :create
     get 'contacts', constraints: { email: /.+/ }, to: 'contacts#show'
   end
 

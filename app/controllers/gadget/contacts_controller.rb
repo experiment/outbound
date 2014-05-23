@@ -1,10 +1,23 @@
 module Gadget
   class ContactsController < ApplicationController
-    before_filter :get_contact, :show_create_if_no_contact
+    before_filter :get_contact, :render_new_if_no_contact, only: :show
     after_filter :allow_in_iframes
 
     def show
       @process = @contact.outbound_process
+    end
+
+    def new
+      @email = params.require(:email)
+    end
+
+    def create
+      contact = Contact.create! do |contact|
+        contact.email = params.require(:email)
+        contact.source = 'gadget'
+      end
+
+      redirect_to gadget_contacts_url(email: contact.email)
     end
 
     private
@@ -13,9 +26,9 @@ module Gadget
         @contact = Contact.by_email(params.require(:email)).take
       end
 
-      def show_create_if_no_contact
+      def render_new_if_no_contact
         unless @contact
-          render text: 'no contact'
+          new && render(:new)
         end
       end
 
