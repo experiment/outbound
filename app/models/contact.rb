@@ -22,6 +22,13 @@ class Contact < ActiveRecord::Base
         name
       when 2
         name.split.first
+      when 3
+        split = name.split
+        if split[1].sub(/\./,'').size == 1
+          split.first
+        else
+          name
+        end
       else
         name
     end
