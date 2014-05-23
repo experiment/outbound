@@ -22,7 +22,9 @@ module Gadget
         contact.outbound_process_state = 'contacted'
       end
 
-      redirect_to gadget_contacts_url(host: 'https://experiment-outbound.herokuapp.com', email: contact.email)
+      redirect_to gadget_contacts_url(email: contact.email,
+        host: 'https://experiment-outbound.herokuapp.com',
+        authority: ENV['AUTHENTICATION_HEADER'])
     end
 
     private
