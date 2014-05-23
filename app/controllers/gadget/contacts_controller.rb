@@ -15,6 +15,7 @@ module Gadget
       contact = Contact.create! do |contact|
         contact.email = params.require(:email)
         contact.source = 'gadget'
+        contact.outbound_process_state = 'contacted'
       end
 
       redirect_to gadget_contacts_url(email: contact.email)
