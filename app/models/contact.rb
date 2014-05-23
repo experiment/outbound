@@ -1,12 +1,15 @@
 class Contact < ActiveRecord::Base
   include Token
 
-  enum source: %w(manual filofax old_outbound)
+  enum source: %w(manual filofax old_outbound gadget)
 
   validates :source, presence: true
   validates :email, presence: true, uniqueness: { case_sensitive: false }
 
-  after_create :create_outbound_process
+  attr_accessor :outbound_process_state
+  after_create do
+    create_outbound_process workflow_state: outbound_process_state
+  end
 
   has_many :emails
   has_one :outbound_process
