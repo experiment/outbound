@@ -4,7 +4,10 @@
   = link_to @contact.id, contact_url(@contact)
   | ]
   .batch
-   = @contact.contacted_at.strftime('%F')
+    - if @contact.contacted_at
+      = @contact.contacted_at.strftime('%F')
+    - else
+      | unknown
 
 - if @process
   .state
