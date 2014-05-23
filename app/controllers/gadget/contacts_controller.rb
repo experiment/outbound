@@ -1,10 +1,14 @@
 module Gadget
   class ContactsController < ApplicationController
-    before_filter :get_contact, :render_new_if_no_contact, only: :show
+    before_filter :get_contact
     after_filter :allow_in_iframes
 
     def show
-      @process = @contact.outbound_process
+      if @contact
+        @process = @contact.outbound_process
+      else
+        new && render(:new)
+      end
     end
 
     def new
@@ -25,12 +29,6 @@ module Gadget
 
       def get_contact
         @contact = Contact.by_email(params.require(:email)).take
-      end
-
-      def render_new_if_no_contact
-        unless @contact
-          new && render(:new)
-        end
       end
 
       def allow_in_iframes
