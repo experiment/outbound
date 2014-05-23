@@ -1,4 +1,4 @@
 = @email
 
-= button_to gadget_contacts_path(email: @email) do
+= button_to gadget_contacts_path(email: @email, authority: ENV['AUTHENTICATION_HEADER']) do
   | Create Contact
