@@ -13,7 +13,7 @@ class Introductions < Mailer
     @published_at = @contact.info[:paper][:published_at].to_date
 
     @keyword = case @contact.info[:journal]
-      when 'BMC Neuroscience', 'BMC Psychology', 'Behavioral and Brain Functions'
+      when 'BMC Neuroscience', 'BMC Psychology', 'Behavioral and Brain Functions', 'BMC Neurology'
         'neuroscience & psychology'
       when 'BMC Cancer'
         'cancer'
@@ -21,6 +21,14 @@ class Introductions < Mailer
         'biology'
       when 'BMC Pediatrics'
         'pediatric'
+      when 'BMC Genomics'
+        'genetics'
+      when 'Journal of Nanobiotechnology'
+        'nanobiology'
+      when 'PLOS Neglected Tropical Diseases'
+        'neglected disease'
+      when 'BMC Immunology'
+        'health related'
       else
         raise "No keyword for this journal (#{@contact.info[:journal]})"
     end
