@@ -1,43 +1,61 @@
 class Introductions < Mailer
 
-  def first_contact(contact_id, template = nil)
+  def first_contact(contact_id)
     @contact = Contact.find contact_id
-    # # Choose version unless specified in args
-    # template ||= %w(phone_call start_page).sample
-    template ||= 'phone_call'
 
     return false if @contact.emailed?
 
-    ensure_contact_has_info :journal, :paper
-
-    @published_at = @contact.info[:paper][:published_at].to_date
-
-    @keyword = case @contact.info[:journal]
-      when 'BMC Neuroscience', 'BMC Psychology', 'Behavioral and Brain Functions', 'BMC Neurology'
-        'neuroscience & psychology'
-      when 'BMC Cancer'
-        'cancer'
-      when 'BMC Evolutionary Biology', 'BMC Plant Biology', 'PLOS Biology', 'PLOS Computational Biology', 'BMC Systems Biology'
-        'biology'
-      when 'BMC Pediatrics'
-        'pediatric'
-      when 'BMC Genomics'
-        'genetics'
-      when 'Journal of Nanobiotechnology'
-        'nanobiology'
-      when 'PLOS Neglected Tropical Diseases'
-        'neglected disease'
-      when 'BMC Immunology'
-        'health related'
+    case @contact.source
+      when 'filofax'
+        first_contact_journal
+      when 'manual'
+        first_contact_manual
       else
-        raise "No keyword for this journal (#{@contact.info[:journal]})"
+        raise 'No template for this contact type'
     end
 
-    mail subject: "I saw your paper in #{@contact.info[:journal]}",
-         template_name: template
+    mail subject: @subject,
+         template_name: @template
   end
 
   private
+
+    def first_contact_journal
+      ensure_contact_has_info :journal, :paper
+
+      @template = 'phone_call'
+      @subject = "I saw your paper in #{@contact.info[:journal]}"
+
+      @published_at = @contact.info[:paper][:published_at].to_date
+
+      @keyword = case @contact.info[:journal]
+        when 'BMC Neuroscience', 'BMC Psychology', 'Behavioral and Brain Functions', 'BMC Neurology'
+          'neuroscience & psychology'
+        when 'BMC Cancer'
+          'cancer'
+        when 'BMC Evolutionary Biology', 'BMC Plant Biology', 'PLOS Biology', 'PLOS Computational Biology', 'BMC Systems Biology'
+          'biology'
+        when 'BMC Pediatrics'
+          'pediatric'
+        when 'BMC Genomics'
+          'genetics'
+        when 'Journal of Nanobiotechnology'
+          'nanobiology'
+        when 'PLOS Neglected Tropical Diseases'
+          'neglected disease'
+        when 'BMC Immunology'
+          'health related'
+        else
+          raise "No keyword for this journal (#{@contact.info[:journal]})"
+      end
+    end
+
+    def first_contact_manual
+      ensure_contact_has_info :source, :url, :type
+
+      @template = 'phone_call_manual'
+      @subject = "I saw your story in #{@contact.info[:source]}"
+    end
 
     def ensure_contact_has_info(*keys)
       keys.each do |key|
