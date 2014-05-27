@@ -1,7 +1,26 @@
 h2 = @date
+
 h3
   = @emails.count
   |  sent
+ul
+  - @emails_by_batch.each do |source, emails|
+    li = "#{source}: #{emails.count}"
+
+h3
+  = @emails.opened.count
+  |  opened
+ul
+  - @emails_by_batch.each do |source, emails|
+    li = "#{source}: #{emails.select(&:opened?).count}"
+
+h3
+  = @emails.replied.count
+  |  replied
+ul
+  - @emails_by_batch.each do |source, emails|
+    li = "#{source}: #{emails.select(&:replied_at?).count}"
+
 h3
   = @emails.select {|email| email.contact.project_created_at }.count
   |  projects created

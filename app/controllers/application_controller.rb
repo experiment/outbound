@@ -10,5 +10,6 @@ class ApplicationController < ActionController::Base
   def batch
     @date = Date.parse(params[:date])
     @emails = Email.on_date(@date).includes(:contact)
+    @emails_by_batch = @emails.group_by {|e| e.contact.source }
   end
 end
