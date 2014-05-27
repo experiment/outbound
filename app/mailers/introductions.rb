@@ -17,7 +17,7 @@ class Introductions < Mailer
         'neuroscience & psychology'
       when 'BMC Cancer'
         'cancer'
-      when 'BMC Evolutionary Biology', 'BMC Plant Biology', 'PLOS Biology', 'PLOS Computational Biology'
+      when 'BMC Evolutionary Biology', 'BMC Plant Biology', 'PLOS Biology', 'PLOS Computational Biology', 'BMC Systems Biology'
         'biology'
       when 'BMC Pediatrics'
         'pediatric'
