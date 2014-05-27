@@ -198,4 +198,48 @@ namespace :import do
       end
     end
   end
+
+  desc 'Import scientific periodical contacts'
+  task periodical: :environment do
+    require 'google_drive'
+
+    session = GoogleDrive.login ENV['GOOGLE_DRIVE_EMAIL'],
+      ENV['GOOGLE_DRIVE_PASSWORD']
+
+    doc = session.spreadsheet_by_key('11fs7BhGs7q35sX2kOqn0dhb7-DLTWLyDv_ypv85fMno')
+
+    doc.worksheets.first(5).each do |sheet|
+
+      sheet.rows.each_with_index do |row, i|
+        # Skip header row
+        next if i < 1
+
+        catergory, term, first_name, in_us, topic, email, url,
+          source, archive_url, imported = *row
+
+        # Skip unless in US
+        next unless in_us =~ /^y/i
+
+        # Skip unless has source and url
+        next unless source.present? && url.present?
+
+        Rails.logger.info "Importing #{email}..."
+
+        # Create Contact
+        contact = Contact.new(source: 'manual') do |contact|
+          contact.name = first_name
+          contact.email = email
+          contact.info = { type: term, source: source, url: url }
+        end
+
+        if contact.save
+          # Mark as imported
+          sheet[i+1, 10] = 'Y'
+          sheet.save
+        end
+      end
+
+    end
+  end
+
 end
