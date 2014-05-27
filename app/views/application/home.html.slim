@@ -18,6 +18,10 @@ table
     th are interested
     th viewed start page
     th created a project
+    th.space
+    th replied / sent
+    th interested / replied
+    th created / interested
 
   - @dates.each do |date|
     - @emails = Email.where(method: 'first_contact').on_date(date).includes(contact: :outbound_process)
@@ -38,3 +42,13 @@ table
             = (100 * stat / sent.to_f).round(1)
             | %
           .count = stat
+      td
+      td
+        = (100 * @emails.replied.count / sent.to_f).round(1)
+        | %
+      td
+        = (100 * @emails.select {|email| email.contact.outbound_process.interested? }.count / @emails.replied.count.to_f).round(1)
+        | %
+      td
+        = (100 * @emails.select {|email| email.contact.project_created_at }.count / @emails.select {|email| email.contact.outbound_process.interested? }.count.to_f).round(1)
+        | %
