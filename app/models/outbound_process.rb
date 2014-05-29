@@ -54,6 +54,15 @@ class OutboundProcess < ActiveRecord::Base
 
   end
 
+  def has(state)
+    workflow_state_timestamps.keys.include? "#{state}_at"
+  end
+
+  # TODO, clean up interest state / method confusion
+  def has_interest
+    has(:interested) || has(:interested_manual)
+  end
+
   def active?
     !dead? && !unsubscribed?
   end
