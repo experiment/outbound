@@ -1,8 +1,9 @@
 .info
   = @contact.email
-  | [
+  |  [
   = link_to @contact.id, contact_url(@contact)
   | ]
+  |  https://experiment.com/start/#{@contact.token}
   .batch
     - if @contact.contacted_at
       = @contact.contacted_at.strftime('%F')
