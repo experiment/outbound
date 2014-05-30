@@ -15,6 +15,7 @@ gem 'coffee-rails', '~> 4.0.0'
 # gem 'therubyracer',  platforms: :ruby
 
 gem 'puma'
+gem 'rack-timeout'
 
 gem 'sidekiq'
 gem 'sinatra'
