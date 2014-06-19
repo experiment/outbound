@@ -14,6 +14,11 @@ Install gems
 bundle install
 ```
 
+Add the heroku app (ask @ryanlower if you don't have access)
+```
+heroku git:remote -a experiment-outbound
+```
+
 Download database
 ```
 heroku pg:pull DATABASE_URL outbound_development
