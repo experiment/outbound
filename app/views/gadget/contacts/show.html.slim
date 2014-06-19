@@ -16,6 +16,8 @@
 
   - if @process.active?
     .status
+      - if @process.can_punt?
+        button.event{data-event='punt'} Punted / Pending
       - if @process.can_called?
         button.event{data-event='called'} Called
       - if @process.can_interest?

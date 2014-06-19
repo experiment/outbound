@@ -5,6 +5,8 @@ module Api
 
       def event
         case event_params
+          when 'punt'
+            @process.punt!
           when 'called'
             @process.called!
           when 'interest_auto'
