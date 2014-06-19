@@ -13,7 +13,7 @@ describe Api::Contacts::ProcessesController do
         get :event, contact_id: @contact.id, event: 'punt'
 
         process = @contact.reload.outbound_process
-        expect(process).to be_been_punt
+        expect(process).to be_punted
 
         expect(response.content_type).to eq 'application/json'
         assert_response 200
