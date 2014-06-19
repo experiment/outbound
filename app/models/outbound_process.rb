@@ -34,7 +34,14 @@ class OutboundProcess < ActiveRecord::Base
       event :stop, transitions_to: :dead
     end
 
-    state :punted # to be contacted at a later date
+    state :punted do # to be contacted at a later date
+      event :called, transitions_to: :been_called
+      event :interest, transitions_to: :interested
+      event :interest_manual, transitions_to: :interested_manual
+
+      event :unsubscribe, transitions_to: :unsubscribed
+      event :stop, transitions_to: :dead
+    end
 
     state :dead # they have said no
     state :unsubscribed # requested unsubscription, never contact again
