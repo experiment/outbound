@@ -9,4 +9,10 @@ class FollowUps < Mailer
 
     mail subject: subject
   end
+
+  def mass_follow_up(contact_id)
+    @contact = Contact.find contact_id
+
+    mail subject: "Re: I saw your paper in #{@contact.info[:journal]}"
+  end
 end
