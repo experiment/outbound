@@ -1,4 +1,17 @@
-Lets do this
+Hi <%= @contact.first_name %>,
 
-Happy <%= Date.today.strftime('%A') %>,
+<% if @contact.info.has_key? :journal %>
+I’m just following up on an email I sent a few weeks ago - I had seen your <%= @contact.info[:paper][:published_at].to_date.strftime('%B') %> <%= @contact.info[:paper][:published_at].to_date.year %> article in <%= @contact.info[:journal] %>.
+<% else %>
+I’m just following up on an email I sent a few weeks ago - I had seen your article in <%= @contact.info[:source] %>
+<% end %>
+
+Why I bring this up: I’m with Experiment.com. We specialize in funding early-stage research projects by way of “crowd-funding” (similar concept to Kickstarter). We’re actively looking for <%= @keyword %> research projects - the more outlandish the better!
+
+Here is a recent example of the type of research we fund:
+https://experiment.com/projects/what-are-the-patterns-and-effects-of-american-crow-movements
+
+My point: would you consider this for your own research (or that of a graduate student)? I know this is a little radical - please let me know if you have questions, I’m happy to explain more!
+
+Best,
 Oscar
