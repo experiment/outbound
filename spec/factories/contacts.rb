@@ -2,8 +2,9 @@
 
 FactoryGirl.define do
   factory :contact do
-    email 'ryan@experiment.com'
+    sequence(:email) {|n| "#{n}@experiment.com" }
     name 'Ryan Lower'
     source 'filofax'
+    info journal: 'Journal of Life'
   end
 end

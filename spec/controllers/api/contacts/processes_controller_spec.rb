@@ -3,16 +3,16 @@ require 'spec_helper'
 describe Api::Contacts::ProcessesController do
 
   describe 'POST event' do
+    let(:contact) { create :contact }
     before do
-      @contact = Contact.create! source: 'filofax', email: 'bob@test.com'
-      @contact.outbound_process.update_attributes! workflow_state: 'contacted'
+      contact.outbound_process.update_attributes! workflow_state: 'contacted'
     end
 
     context 'a contacted contact' do
       it 'punt on punt' do
-        get :event, contact_id: @contact.id, event: 'punt'
+        get :event, contact_id: contact.id, event: 'punt'
 
-        process = @contact.reload.outbound_process
+        process = contact.reload.outbound_process
         expect(process).to be_punted
 
         expect(response.content_type).to eq 'application/json'
@@ -20,9 +20,9 @@ describe Api::Contacts::ProcessesController do
       end
 
       it 'been_called on called' do
-        get :event, contact_id: @contact.id, event: 'called'
+        get :event, contact_id: contact.id, event: 'called'
 
-        process = @contact.reload.outbound_process
+        process = contact.reload.outbound_process
         expect(process).to be_been_called
 
         expect(response.content_type).to eq 'application/json'
@@ -30,9 +30,9 @@ describe Api::Contacts::ProcessesController do
       end
 
       it 'interested on interest' do
-        get :event, contact_id: @contact.id, event: 'interest_auto'
+        get :event, contact_id: contact.id, event: 'interest_auto'
 
-        process = @contact.reload.outbound_process
+        process = contact.reload.outbound_process
         expect(process).to be_interested
 
         expect(response.content_type).to eq 'application/json'
@@ -40,9 +40,9 @@ describe Api::Contacts::ProcessesController do
       end
 
       it 'interested_manual on interest_manual' do
-        get :event, contact_id: @contact.id, event: 'interest_manual'
+        get :event, contact_id: contact.id, event: 'interest_manual'
 
-        process = @contact.reload.outbound_process
+        process = contact.reload.outbound_process
         expect(process).to be_interested_manual
 
         expect(response.content_type).to eq 'application/json'
@@ -50,9 +50,9 @@ describe Api::Contacts::ProcessesController do
       end
 
       it 'stops on stop' do
-        get :event, contact_id: @contact.id, event: 'stop'
+        get :event, contact_id: contact.id, event: 'stop'
 
-        process = @contact.reload.outbound_process
+        process = contact.reload.outbound_process
         expect(process).to be_dead
 
         expect(response.content_type).to eq 'application/json'
@@ -60,9 +60,9 @@ describe Api::Contacts::ProcessesController do
       end
 
       it 'unsubscribes on unsubscribe' do
-        get :event, contact_id: @contact.id, event: 'unsubscribe'
+        get :event, contact_id: contact.id, event: 'unsubscribe'
 
-        process = @contact.reload.outbound_process
+        process = contact.reload.outbound_process
         expect(process).to be_unsubscribed
 
         expect(response.content_type).to eq 'application/json'

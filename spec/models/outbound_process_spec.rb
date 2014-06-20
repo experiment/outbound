@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe OutboundProcess do
+  let(:contact) { create :contact }
   before do
-    @contact = Contact.create! source: 'filofax', email: 'bob@test.com'
-    @process = @contact.outbound_process
+    @process = contact.outbound_process
     @process.update_attributes! workflow_state: 'contacted'
   end
 
@@ -15,8 +15,8 @@ describe OutboundProcess do
 
       message = ActionMailer::Base.deliveries.last
       expect(message._mailer_method).to eq :interested_first_follow_up
-      expect(message._recipient_contact_id).to eq @contact.id
-      expect(message.body).to include("start/#{@contact.token}")
+      expect(message._recipient_contact_id).to eq contact.id
+      expect(message.body).to include("start/#{contact.token}")
     end
   end
 end
