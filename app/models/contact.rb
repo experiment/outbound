@@ -1,7 +1,7 @@
 class Contact < ActiveRecord::Base
   include Token
 
-  enum source: %w(manual filofax old_outbound gadget)
+  enum source: %w(manual filofax old_outbound gadget institution_manual)
 
   validates :source, presence: true
   validates :email, presence: true, uniqueness: { case_sensitive: false }

@@ -25,7 +25,7 @@ namespace :import do
         next
       end
 
-      contact = Contact.new(source: 'manual') do |contact|
+      contact = Contact.new(source: 'institution_manual') do |contact|
         contact.email = row[0]
         contact.name = row[1]
         contact.info = Hash[*row[2, row.length].each_with_index.map do |el, i|
