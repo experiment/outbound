@@ -49,6 +49,10 @@ class Introductions < Mailer
           'neglected disease'
         when 'BMC Immunology'
           'health related'
+        when 'BMC Biophysics'
+          'biophysics'
+        when 'Agriculture & Food Security'
+          'food security'
         else
           raise "No keyword for this journal (#{@contact.info[:journal]})"
       end
