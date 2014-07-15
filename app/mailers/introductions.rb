@@ -17,7 +17,8 @@ class Introductions < Mailer
     end
 
     mail subject: @subject,
-         template_name: @template
+         template_name: @template,
+         bcc: 'oscarj@experiment.com'
   end
 
   private
