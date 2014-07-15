@@ -10,6 +10,8 @@ class Introductions < Mailer
         first_contact_journal
       when 'manual'
         first_contact_manual
+      when 'institution_manual'
+        first_contact_institution_manual
       else
         raise 'No template for this contact type'
     end
@@ -55,6 +57,13 @@ class Introductions < Mailer
 
       @template = 'phone_call_manual'
       @subject = "I saw your story in #{@contact.info[:source]}"
+    end
+
+    def first_contact_institution_manual
+      ensure_contact_has_info :link
+
+      @template = 'institution_manual'
+      @subject = 'Your research featured by Columbia University'
     end
 
     def ensure_contact_has_info(*keys)
