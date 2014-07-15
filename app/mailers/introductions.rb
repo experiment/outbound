@@ -18,7 +18,7 @@ class Introductions < Mailer
 
     mail subject: @subject,
          template_name: @template,
-         bcc: 'oscarj@experiment.com'
+         bcc: @bcc
   end
 
   private
@@ -28,6 +28,7 @@ class Introductions < Mailer
 
       @template = 'phone_call'
       @subject = "I saw your paper in #{@contact.info[:journal]}"
+      @bcc = nil
 
       @published_at = @contact.info[:paper][:published_at].to_date
 
@@ -58,6 +59,7 @@ class Introductions < Mailer
 
       @template = 'phone_call_manual'
       @subject = "I saw your story in #{@contact.info[:source]}"
+      @bcc = nil
     end
 
     def first_contact_institution_manual
@@ -65,6 +67,7 @@ class Introductions < Mailer
 
       @template = 'institution_manual'
       @subject = 'Your research featured by Columbia University'
+      @bcc = 'oscarj@experiment.com'
     end
 
     def ensure_contact_has_info(*keys)
