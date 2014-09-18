@@ -18,9 +18,9 @@ module Api
     def csv
       respond_to do |format|
         csv = CSV.generate do |csv|
-          csv << "first_name,last_name,email"
+          csv << %w(first_name last_name email)
           Contact.all.each do |c|
-            csv << "#{c.first_name}, #{c.name.gsub(c.first_name, '').lstrip}, #{c.email}"
+            csv << ["#{c.first_name}", "#{c.name.gsub(c.first_name, '').lstrip}", "#{c.email}"]
           end
         end
         format.csv { send_data csv }
