@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   resource :mandrill_hooks, only: %i(show create)
 
   get ':date' => 'application#batch', as: :batch
+  get ':csv' => 'application#csv'
   root 'application#home'
 
 end
