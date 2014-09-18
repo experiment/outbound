@@ -20,7 +20,11 @@ module Api
         csv = CSV.generate do |csv|
           csv << %w(first_name last_name email)
           Contact.all.each do |c|
-            csv << ["#{c.first_name}", "#{c.name.gsub(c.first_name, '').lstrip}", "#{c.email}"]
+            if c.name.present?
+              csv << ["#{c.first_name}", "#{c.name.gsub(c.first_name, '').lstrip}", "#{c.email}"]
+            else
+              csv << ["", "", "#{c.email}"]
+            end
           end
         end
         format.csv { send_data csv }
