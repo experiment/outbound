@@ -16,7 +16,7 @@ module Api
     end
 
     def csv
-      respond_with |format|
+      respond_to do |format|
         csv = CSV.generate do |csv|
           csv << "first_name,last_name,email"
           Contact.all.each do |c|
