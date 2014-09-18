@@ -15,6 +15,18 @@ module Api
       head :created
     end
 
+    def csv
+      respond_with |format|
+        csv = CSV.generate do |csv|
+          csv << "first_name,last_name,email"
+          Contact.all.each do |c|
+            csv << "#{c.first_name}, #{c.name.gsub(c.first_name, '').lstrip}, #{c.email}"
+          end
+        end
+        format.csv { send_data csv }
+      end
+    end
+
     private
 
       def source_params
