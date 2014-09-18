@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get 'process/event', to: 'contacts/processes#event'
     end
     resource :events, only: :create
+    get :csv, to: 'contacts#csv'
   end
 
   namespace :gadget do
@@ -22,7 +23,6 @@ Rails.application.routes.draw do
   resource :mandrill_hooks, only: %i(show create)
 
   get ':date' => 'application#batch', as: :batch
-  get ':csv' => 'application#csv'
   root 'application#home'
 
 end
