@@ -1,3 +1,6 @@
+Mandrill webhooks no longer set up for this. Add a webhook at https://mandrillapp.com/settings/webhooks/
+Mar 24 2016
+
 # Outbound
 
 Sends & tracks outbound emails and provides the outbound widget in oscarj
